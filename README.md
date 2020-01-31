@@ -1,8 +1,11 @@
 # Ansible
 
-setup ssh-key  
-send ssh key to all the VMs  
+Boot ansible VM
 
+- Run the setup_ansible_${OS}.sh
 
-put the ip id in the hosts file  
-ip_adress name_host
+- Set up Hosts file
+
+- Send ssh-key to the hosts
+
+- Check if the SELinux in enabled on the remote nodes '''getenforce'''
