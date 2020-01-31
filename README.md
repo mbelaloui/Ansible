@@ -8,4 +8,4 @@ Boot ansible VM
 
 - Send ssh-key to the hosts
 
-- Check if the SELinux in enabled on the remote nodes '''getenforce'''
+- Check if the SELinux in enabled on the remote nodes `getenforce`
