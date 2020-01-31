@@ -8,4 +8,6 @@ Boot ansible VM
 
 - Send ssh-key to the hosts
 
-- Check if the SELinux in enabled on the remote nodes `getenforce`
+- Check if the SELinux in enabled on the remote nodes `getenforce` 
+	* if it's enabled we have to install on the nodes the `libselinux-python` before using any cp/file/template related functions in Ansible.
+
