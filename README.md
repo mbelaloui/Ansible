@@ -62,17 +62,21 @@ Strucutre for the PlayBook files
     - var1: VAR_TO_USE_IN_TASKS
     - var2:
 
-  tasks:
+  tasks:  ACTONS
   - name: NAME_TASKE
     module: IS USED TO TELL ANSIBLE HOW TO CONFIGURE THE TARGET SYSTEM
 
-  handlers:
-  - name: 
-    service:
+  handlers: 
+  - name: NAME_HANDLERS
+    service: ACTIONS TO DO WHEN ALL THE PLAYS OF THE PLAYBOOKS ARE SUCCESSFULLY COMPLETED
 
 ```
 
+## RUN Ansible
 
+ - Ad-Hoc : ansible <inventories> -m module --options
+ - Playbooks : ansible-playbook --options playbooks.yml
+ - Automation framework : Ansible Tower
 
 
 
