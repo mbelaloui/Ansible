@@ -1,7 +1,10 @@
 # Ansible
 
 Ansible is an automation agentless engine that enable us to describe an IT infrastructure throw playbook.   
-   
+Ansible push over ssh small programs, called 'Ansible modules' to nodes. This modules are used to describe the desired state of the system.
+This modules are deleted when the pays is finished.
+
+A good practice is to use ssh-keys, kerberos is also supported.
    
 Use case :
 * We can deploy app
@@ -32,6 +35,8 @@ ip/hosteName
 ip/hosteName
 
 ```
+We can use dynamic inventory to pull the inventory form EC2, SpenStack, ...
+
 
 ## PlayBook
  YAML files that discribe the desired state of something.   
@@ -77,6 +82,10 @@ Strucutre for the PlayBook files
  - Ad-Hoc : ansible <inventories> -m module --options
  - Playbooks : ansible-playbook --options playbooks.yml
  - Automation framework : Ansible Tower
+
+## ANSIBLE GALAXY
+
+ Is a repo which contain roles, playbooks and modules made the community.
 
 
 
