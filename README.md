@@ -7,8 +7,8 @@ Use case :
 * We can deploy app
 * Provisioning
 * Config management
-* Continuous delivry
-* Securit and Compliance
+* Continuous delivery
+* Security and Compliance
 * Orchestration
 
 Setup ansible VM
@@ -20,7 +20,7 @@ Setup ansible VM
 	* if it's enabled we have to install on the nodes the `libselinux-python` before using any cp/file/template related functions in Ansible.
 
 ## Inventories
- Is the list of the targets in witch we whant to automate   
+ Is the list of the targets in which we want to automate   
 ### example
 ```
 ---
@@ -64,7 +64,7 @@ Strucutre for the PlayBook files
 
   tasks:
   - name: NAME_TASKE
-    module: IS USED TO TELL ANSIBLE WHO TO CONFIGURE THE TARGET SYSTEM
+    module: IS USED TO TELL ANSIBLE HOW TO CONFIGURE THE TARGET SYSTEM
 
   handlers:
   - name: 
