@@ -4,14 +4,14 @@ Ansible is an automation agentless engine that enable us to describe an IT infra
 Ansible push over ssh small programs, called 'Ansible modules' to nodes. This modules are used to describe the desired state of the system.
 This modules are deleted when the pays is finished.
 
-A good practice is to use ssh-keys, kerberos is also supported.
+A good practice is to use ssh-keys instead of passwords, kerberos is also supported.
    
 Use case :
-* We can deploy app
 * Provisioning
 * Config management
+* App deployment
 * Continuous delivery
-* Security and Compliance
+* Security
 * Orchestration
 
 Setup ansible VM
