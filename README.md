@@ -23,7 +23,10 @@ Setup ansible VM
 	* if it's enabled we have to install on the nodes the `libselinux-python` before using any cp/file/template related functions in Ansible.
 
 ## Inventories
- Is the list of the targets in which we want to automate   
+ Is the list of the targets in which we want to automate 
+
+ we can also setup, user and ssh-key location 
+
 ### example
 ```
 ---
