@@ -89,6 +89,28 @@ Strucutre for the PlayBook files
 
 
 
+##Modules :
+
+```
+ apt/yum
+ command 
+ copy
+ file
+ get_url
+ git
+ ping
+ debug
+ raw     : "very useful if the machine that we are talking to doesn't have python"
+ script
+ service
+ shell
+ synchronize
+ template
+ uri
+ user
+ wait_for
+ assert
+```
 
 
 
