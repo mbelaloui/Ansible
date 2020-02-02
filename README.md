@@ -7,7 +7,7 @@ This modules are deleted when the pays is finished.
 A good practice is to use ssh-keys instead of passwords, kerberos is also supported.
    
 Use case :
-* Provisioning
+* Provisioning the infra
 * Config management
 * App deployment
 * Continuous delivery
