@@ -4,14 +4,14 @@ Ansible is an automation agentless engine that enable us to describe an IT infra
 Ansible push over ssh small programs, called 'Ansible modules' to nodes. This modules are used to describe the desired state of the system.
 This modules are deleted when the pays is finished.
 
-A good practice is to use ssh-keys, kerberos is also supported.
+A good practice is to use ssh-keys instead of passwords, kerberos is also supported.
    
 Use case :
-* We can deploy app
-* Provisioning
+* Provisioning the infra
 * Config management
+* App deployment
 * Continuous delivery
-* Security and Compliance
+* Security
 * Orchestration
 
 Setup ansible VM
@@ -23,7 +23,10 @@ Setup ansible VM
 	* if it's enabled we have to install on the nodes the `libselinux-python` before using any cp/file/template related functions in Ansible.
 
 ## Inventories
- Is the list of the targets in which we want to automate   
+ Is the list of the targets in which we want to automate 
+
+ we can also setup, user and ssh-key location 
+
 ### example
 ```
 ---
@@ -89,6 +92,28 @@ Strucutre for the PlayBook files
 
 
 
+##Modules :
+
+```
+ apt/yum
+ command 
+ copy
+ file
+ get_url
+ git
+ ping
+ debug
+ raw     : "very useful if the machine that we are talking to doesn't have python"
+ script
+ service
+ shell
+ synchronize
+ template
+ uri
+ user
+ wait_for
+ assert
+```
 
 
 
