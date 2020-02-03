@@ -46,7 +46,11 @@
                     regexp: '#server.host: "localhost"'
                     replace: 'server.host: "{{ ip_bootcamp }}"'
 
-                    
+          - name : config kibana-elastic connexion 
+            lineinfile:
+                    path: /etc/kibana/kibana.yml
+                    line: 'elasticsearch.hosts: ["http://{{ ip_bootcamp }}:9200"]'
+                     
                     #          - name: Create the log directory if it does not exist
                     #            file:
                     #                    path: /var/log/kibana
@@ -69,11 +73,6 @@
                     #                    regexp: '#logging.dest: stdout'
                     #                    replace: 'logging.dest: /var/log/kibana/kibana.log' 
 
-                    #          - name : config kibana-elastic connexion
-                    #            replace:
-                    #                    path: /etc/kibana/kibana.yml
-                    #                    regexp: '#elasticsearch.hosts: ["http://localhost:9200"]'
-                    #                    replace: 'elasticsearch.hosts: ["http://localhost:9200"]'
                    
           - name : start kibana
             systemd:
