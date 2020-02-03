@@ -19,16 +19,14 @@
 
                     
           - name : config elastic network
-            replace:
+            lineinfile:
                     path: /etc/elasticsearch/elasticsearch.yml
-                    regexp: '#network.host: 192.168.0.1'
-                    replace: 'network.host: _global_'
+                    line: 'network.host: _site_'
 
           - name : config seed network
-            replace:
+            lineinfile:
                     path: /etc/elasticsearch/elasticsearch.yml
-                    regexp: '#discovery.seed_hosts: ["host1", "host2"]'
-                    replace: 'discovery.seed_hosts: ["{{ ip_bootcamp }}"]'
+                    line: 'discovery.seed_hosts: ["{{ ip_bootcamp }}"]'
  
           - name : starte elastic
             systemd :
