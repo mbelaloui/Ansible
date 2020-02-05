@@ -31,7 +31,7 @@ We can organize our list of host be creating and nesting groups, that make scali
 
 We can store in the inventories aliases, variable for single with ```host vars``` or multiple hosts with ```group var```
 
-### example
+### Example
 ```
 ---
 [NAME_HOST]
@@ -89,7 +89,7 @@ Tasks run sequentially in a play
 
 Strucutre for the PlayBook files
 
-### example
+### Example
 
 ```
 
@@ -114,7 +114,7 @@ Strucutre for the PlayBook files
 ```
 
 https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#about-playbooks
-## handeler
+## Handeler
 
 Handler are special tasks that run at the end of a play if notified by another task.
 
