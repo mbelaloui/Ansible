@@ -18,41 +18,74 @@ Setup ansible VM
 
 - Run the setup_ansible_${OS}.sh
 - Set up Hosts file <Inventories>
-- Send ssh-key to the hosts
+- add public SSH-key to the authorized_key file on the remote nodes
+- Confirm that we can ping all the nodes with the module [ping] ```ansible all -m ping```  
 - Check if the SELinux in enabled on the remote nodes `getenforce` 
 	* if it's enabled we have to install on the nodes the `libselinux-python` before using any cp/file/template related functions in Ansible.
 
-## Inventories
- Is the list of the targets in which we want to automate 
+## Inventories / Hostfile
 
- we can also setup, user and ssh-key location 
+Is the list of the targets/nodes in which we want to automate.   
+
+We can organize our list of host be creating and nesting groups, that make scaling easy and let us take advantage of the full flexibility and repeatability of Ansible.
+
+We can store in the inventories aliases, variable for single with ```host vars``` or multiple hosts with ```group var```
 
 ### example
 ```
 ---
 [NAME_HOST]
-ip/hosteName
+ip/FQDNs
 
 [NAME_GROUP_HOST]
-ip/hosteName
-ip/hosteName
+ip/FQDNs
+ip/FQDNs
 
 ```
 We can use dynamic inventory to pull the inventory form EC2, SpenStack, ...
+https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#intro-inventory
 
+
+## Modules 
+
+These Are the units of code that Ansible executes in the remote nodes.
+Each modules as has a particular use.
+
+```
+ apt/yum
+ command 
+ copy
+ file
+ get_url
+ git
+ ping
+ debug
+ raw     : "very useful if the machine that we are talking to doesn't have python"
+ script
+ service
+ shell
+ synchronize
+ template
+ uri
+ user
+ wait_for
+ assert
+```
+https://docs.ansible.com/ansible/latest/modules/modules_by_category.html#modules-by-category
+
+
+## Tasks
+
+Is the units of actions in ansible.
+Tasks are a list of actions that call modules.  
 
 ## PlayBook
- YAML files that discribe the desired state of something.   
 
- PlayBooks contain plays.   
- Plays contain tasks.  
- Tasks are a list of actions that call modules.   
- Modules are the Actions that are been executed in the remote system.  
+The playbooks are ordered list of tasks, and are written in YAML format.   
+PlayBooks contain plays   
+Plays contain tasks  
 
- Tasks run sequentially
-
- Handlers are triggered by tasks, and are run once at the end of plays
-
+Tasks run sequentially in a play
 
 Strucutre for the PlayBook files
 
@@ -80,43 +113,7 @@ Strucutre for the PlayBook files
 
 ```
 
-https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
-
-## RUN Ansible
-
- - Ad-Hoc : ansible <inventories> -m module --options
- - Playbooks : ansible-playbook --options playbooks.yml
- - Automation framework : Ansible Tower
-
-## ANSIBLE GALAXY
-
- Is a repo which contain roles, playbooks and modules made the community.
-
-
-
-## Modules :
-
-```
- apt/yum
- command 
- copy
- file
- get_url
- git
- ping
- debug
- raw     : "very useful if the machine that we are talking to doesn't have python"
- script
- service
- shell
- synchronize
- template
- uri
- user
- wait_for
- assert
-```
-
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#about-playbooks
 ## handeler
 
 Handler are special tasks that run at the end of a play if notified by another task.
@@ -126,19 +123,43 @@ if a configuration file gets changed, it will notify the service that is related
 ## Variables
 
 
+https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
+
+## Precedence rules
+
+https://docs.ansible.com/ansible/latest/reference_appendices/general_precedence.html#general-precedence-rules
+
+## RUN Ansible
+
+ - Ad-Hoc : ansible <inventories> -m module --options   ```https://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html#intro-adhoc```
+ - Playbooks : ansible-playbook --options playbooks.yml
+ - Automation framework : Ansible Tower
+
+## ANSIBLE GALAXY
+
+ Is a repo which contain roles, playbooks and modules made the community.
 
 
 
 
 
-see the diff [file / template]
+
+#### Stoped at 
+https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
 
 
 
 
-rasks header
 
 
+NB : see the diff [file / template] Tasks header
+##  Configuring Ansible
 
+https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html#intro-configuration
+
+
+## Ressources
+https://docs.ansible.com/ansible/latest/user_guide/become.html#become
+https://docs.ansible.com/ansible/latest/user_guide/connection_details.html#connections
 https://www.ansible.com/overview/how-ansible-works
 https://vmmasterblog.wordpress.com/2017/02/22/introduction-to-ansible/
