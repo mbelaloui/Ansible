@@ -157,6 +157,7 @@ NB : see the diff [file / template] Tasks header
 
 https://docs.ansible.com/ansible/latest/installation_guide/intro_configuration.html#intro-configuration
 
+https://opensource.com/downloads/ansible-quickstart?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW
 
 ## Ressources
 https://docs.ansible.com/ansible/latest/user_guide/become.html#become
