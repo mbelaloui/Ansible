@@ -80,6 +80,8 @@ Strucutre for the PlayBook files
 
 ```
 
+https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
+
 ## RUN Ansible
 
  - Ad-Hoc : ansible <inventories> -m module --options
@@ -92,7 +94,7 @@ Strucutre for the PlayBook files
 
 
 
-##Modules :
+## Modules :
 
 ```
  apt/yum
@@ -115,7 +117,28 @@ Strucutre for the PlayBook files
  assert
 ```
 
+## handeler
+
+Handler are special tasks that run at the end of a play if notified by another task.
+
+if a configuration file gets changed, it will notify the service that is related too and do the actions given
+
+## Variables
+
+
+
+
+
+
+
+see the diff [file / template]
+
+
+
+
+rasks header
 
 
 
 https://www.ansible.com/overview/how-ansible-works
+https://vmmasterblog.wordpress.com/2017/02/22/introduction-to-ansible/
