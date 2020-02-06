@@ -26,23 +26,24 @@ Setup ansible VM
 ## Inventories / Hostfile
 
 Is the list of the targets/nodes in which we want to automate.   
-
+The default location for the inventory file is /etc/ansible/hosts, we can specify different file at the run of the command line using -i <path>
 We can organize our list of host be creating and nesting groups, that make scaling easy and let us take advantage of the full flexibility and repeatability of Ansible.
-
+A good practice is to use dynamic inventory for more flexibility, and use the FQDN to define hosts rather than IPs.
 We can store in the inventories aliases, variable for single with ```host vars``` or multiple hosts with ```group var```
 
-### Example
+### Example INI format 
 ```
 ---
-[NAME_HOST]
-ip/FQDNs
+[NAME_HOST]        # group names
+ip/FQDNs           # Host_1
 
-[NAME_GROUP_HOST]
-ip/FQDNs
-ip/FQDNs
+[NAME_GROUP_HOST]  # group names
+ip/FQDNs           # Host_2
+ip/FQDNs           # Host_3
 
 ```
-We can use dynamic inventory to pull the inventory form EC2, SpenStack, ...
+
+
 https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#intro-inventory
 
 
@@ -145,7 +146,7 @@ https://docs.ansible.com/ansible/latest/reference_appendices/general_precedence.
 
 
 #### Stoped at 
-https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html
+https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#id10
 
 
 
