@@ -155,6 +155,8 @@ Ansible will run commands form current user account. If we want to change this b
 
 #### Stoped at 
 https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#id10
+5. Ansible – Playbooks
+mail mbelalou42@gmail.com
 
 
 
