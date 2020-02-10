@@ -205,7 +205,7 @@ https://vmmasterblog.wordpress.com/2017/02/22/introduction-to-ansible/
 
 ## Role 4 `install Master node elasticearch`
 - Call the role 3
-- Configure port `elastic close 9200`
+- Configure port `close 9200 Port`
 - Copie the template file to the target machine
 
 
