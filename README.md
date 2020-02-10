@@ -134,9 +134,15 @@ https://docs.ansible.com/ansible/latest/reference_appendices/general_precedence.
 
 ## RUN Ansible
 
- - Ad-Hoc : ansible <inventories> -m module --options   ```https://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html#intro-adhoc```
+ - Ad-Hoc : ansible <inventories> -m module --options   ```https://docs.ansible.com/ansible/latest/user_guide/
+    ad-hoc commandes are not used for configration, management and deployment, these commands are of one time usage. 
+
+ intro_adhoc.html#intro-adhoc```
  - Playbooks : ansible-playbook --options playbooks.yml
  - Automation framework : Ansible Tower
+
+
+Ansible will run commands form current user account. If we want to change this behavior, w'll have to pass the username in the commands.
 
 ## ANSIBLE GALAXY
 
@@ -167,3 +173,49 @@ https://docs.ansible.com/ansible/latest/user_guide/become.html#become
 https://docs.ansible.com/ansible/latest/user_guide/connection_details.html#connections
 https://www.ansible.com/overview/how-ansible-works
 https://vmmasterblog.wordpress.com/2017/02/22/introduction-to-ansible/
+
+
+
+
+
+
+# Roles to Config to do in Ansible :
+
+
+## Role 1 to all new machine  `init machine`
+- With raw module install python in the target machines
+- Send ssh-key.pub to the target machines
+- Change the connection security to accept only keepass
+- Restart ssh service
+
+## Role 2 Config system to handle distributed services
+- Swap 1%
+- Ulimit <fd, Numbere of threads, lock memory>
+- Increase the limit of the virtual memory. 
+
+### `NB : the deb and rpm pachages of easticsearch will configure the virtual memory and Numbere of threads automaticly`
+
+
+## Role 3 `Install default elasticsearch`
+- Call the role 2
+- Install elasticsearch.deb 
+
+
+## Role 4 `install Master node elasticearch`
+- Call the role 3
+- Configure port `elastic close 9200`
+- Copie the template file to the target machine
+
+
+## Role 5 `install Data node elasticearch`
+- Call the role 3
+- Copie the template file to the target machine
+
+
+## Role 6 `install Coordinating node elasticearch`
+- Call the role 3
+- Copie the template file to the target machine
+
+## Role 6 `install Ingest node elasticearch`
+- Call the role 3
+- Copie the template file to the target machine
