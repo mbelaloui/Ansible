@@ -90,6 +90,8 @@ Tasks run sequentially in a play
 
 Strucutre for the PlayBook files
 
+Every YAML file optionally starts with “---” and ends with “...”.
+
 ### Example
 
 ```
