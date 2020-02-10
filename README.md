@@ -113,7 +113,7 @@ Every YAML file optionally starts with “---” and ends with “...”.
   handlers: 
   - name: NAME_HANDLERS
     service: ACTIONS TO DO WHEN ALL THE PLAYS OF THE PLAYBOOKS ARE SUCCESSFULLY COMPLETED
-
+`...
 ```
 
 https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#about-playbooks
