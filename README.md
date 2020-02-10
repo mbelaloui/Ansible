@@ -179,7 +179,7 @@ https://vmmasterblog.wordpress.com/2017/02/22/introduction-to-ansible/
 
 
 
-# Roles to Config to do in Ansible :
+# Roles to write:
 
 
 ## Role 1 to all new machine  `init machine`
