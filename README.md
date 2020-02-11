@@ -191,6 +191,7 @@ https://vmmasterblog.wordpress.com/2017/02/22/introduction-to-ansible/
 - Restart ssh service
 
 ## Role 2 Config system to handle distributed services
+- Call the role 1
 - Swap 1%
 - Ulimit <fd, Numbere of threads, lock memory>
 - Increase the limit of the virtual memory. 
