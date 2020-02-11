@@ -201,7 +201,7 @@ https://vmmasterblog.wordpress.com/2017/02/22/introduction-to-ansible/
 ## Role 3 `Install default elasticsearch`
 - Call the role 2
 - Install elasticsearch.deb 
-
+- configure Heap-Jvm
 
 ## Role 4 `install Master node elasticearch`
 - Call the role 3
