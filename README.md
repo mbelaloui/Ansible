@@ -125,10 +125,20 @@ if a configuration file gets changed, it will notify the service that is related
 
 ## Variables
 
+Variables begin with a letter and never withe a special char.
+
+Can be defined :
+- Inside a play book : vars
+- In a file outside the playbook using vars_file
+- In an inventory file or dir containing files
+- set from the command line
 
 https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
 
 ## Precedence rules
+
+Variables defined in inventory [Hosts, host_vas, group_vars] could be overriden by the playbook's [vars, var_file], and 
+variable in playbook could be overriden by the command line -extra-vars "key=val"
 
 https://docs.ansible.com/ansible/latest/reference_appendices/general_precedence.html#general-precedence-rules
 
