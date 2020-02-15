@@ -222,23 +222,22 @@ handlers:
 Also handlers can listen to generic topic, and tasks can notify those topic 
 
 ```
-handlers:
-    - name: restart memcached
-      service:
-        name: memcached
-        state: restarted
-      listen: "restart web services"
-    - name: restart apache
-      service:
-        name: apache
-        state: restarted
-      listen: "restart web services"
-
-tasks:
-    - name: restart everything
-      command: echo "this task will restart the web services"
-      notify: "restart web services"
-```   
+handlers:  
+    - name: restart memcached   
+      service:   
+        name: memcached   
+        state: restarted   
+      listen: "restart web services"   
+    - name: restart apache   
+      service:   
+        name: apache   
+        state: restarted   
+      listen: "restart web services"    
+tasks:  
+    - name: restart everything   
+      command: echo "this task will restart the web services"   
+      notify: "restart web services"   
+```  
 
 ## Variables
 
