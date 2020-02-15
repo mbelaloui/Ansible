@@ -48,15 +48,15 @@ A good practice is to create the ``` group_vars ``` directory and add directorie
 
 ## Inventory Setup
 ### By envirenment
-  we can group hosts by environment [test, stagn, prod, ...].
+  we can group hosts by environment [test, stagn, prod, ...]   
   This make harder to accidentally change state of node inside the test environment when actualy wanted to update some staging servers
 
 ### BY function
-  We can group hosts by functions[ DB, web, service_x,... ]
+  We can group hosts by functions[ DB, web, service_x,... ]   
 This allows us to define some characteristics of a group of same service
 
 ### By location
-  We can group hosts by theres locations[ location_1,location_2,... ]
+  We can group hosts by theres locations[ location_1,location_2,... ]   
   This allows us to change state of hosts in a specific location.
 
 NB : The goup_vas and the host_vars directories should be in the same directory of the inventory file to be taiken into account.
@@ -65,11 +65,11 @@ https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#intro-in
 
 ## Patterns
 
-  We use patterns any time we execute an ad-hoc command : 
-    - ansible <pattern> -m <module_name> -a "<module_option>"
-  Or a playbook the pattern in the playbook is the content of the hosts:
-    - name: <play_name>
-      hosts: <pattern>
+  We use patterns any time we execute an ad-hoc command :    
+    - ansible <pattern> -m <module_name> -a "<module_option>"   
+  Or a playbook the pattern in the playbook is the content of the hosts:   
+    ``` - name: <play_name>   
+      hosts: <pattern> ```  
 
 Since we often want to run a command or playbook against multiple host at once, patterns often refer to inventory groups.   
 
@@ -201,7 +201,7 @@ https://docs.ansible.com/ansible/latest/reference_appendices/general_precedence.
   The ad-hoc commands are quick and easy, that demonstarte the simplicity and the power of Ansible, but are not re-usable.
   We can use any Ansible module in ad-hoc task.
 
- * Ad-Hoc : ansible <inventories> -m module --options   ```https://docs.ansible.com/ansible/latest/user_guide/ ```
+ * Ad-Hoc : ansible <inventories> -m module --options   ```https://docs.ansible.com/ansible/latest/user_guide/ ```   
     ad-hoc commandes are not used for configration, management and deployment, these commands are of one time usage. 
 
   #### Use caes 
