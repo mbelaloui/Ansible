@@ -216,7 +216,8 @@ handlers:
   - name: restart web service
     service:
       name: "{{ web_service_name | default('httpd') }}"
-      state: restarted ```   
+      state: restarted 
+```   
 
 
 Also handlers can listen to generic topic, and tasks can notify those topic 
