@@ -86,19 +86,16 @@ Since we often want to run a command or playbook against multiple host at once, 
 |Intersection of groups |	webservers:&staging | any hosts in webservers that are also in staging|
 
 
-## Key words related to the host_file
+### Key words related to the host_file
 
-### ansible_host
-  The name of the host to connect to
-
-### ansible_port
-  The connection port number 'default 22'
-
-### ansible_user
-  The user name to use when connecting to the host
-
-### ansible_password
-  The password to use to authenticate to the host ``` Always use vault to store this variable ```
+- ansible_host
+    The name of the host to connect to
+- ansible_port
+    The connection port number 'default 22'
+- ansible_user
+    The user name to use when connecting to the host
+- ansible_password
+    The password to use to authenticate to the host ``` Always use vault to store this variable ```
 
 
 
