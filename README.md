@@ -103,7 +103,8 @@ Since we often want to run a command or playbook against multiple host at once, 
 ## Modules 
 
 These Are the units of code that Ansible executes in the remote nodes.
-Each modules as has a particular use.
+Each modules as has a particular use.   
+### modules should be idempotent and can relay when they have made a change on the remote system.   
 
 ```
  apt/yum
@@ -139,13 +140,18 @@ The playbooks are ordered list of tasks, and are written in YAML format.
 PlayBooks contain plays   
 Plays contain tasks  
 
+The goal of a play is to map a group of hosts to some well defined roles, represented by things ansible calls tasks. At a basic level, a task is nothing more than a call to an ansible module.   
+
 Tasks run sequentially in a play
 
 Strucutre for the PlayBook files
 
 Every YAML file optionally starts with “---” and ends with “...”.
 
+
 ### Example
+
+https://github.com/ansible/ansible-examples
 
 ```
 
@@ -175,6 +181,64 @@ https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#about-pl
 Handler are special tasks that run at the end of a play if notified by another task.
 
 if a configuration file gets changed, it will notify the service that is related too and do the actions given
+
+```
+- name: template configuration file
+  template:
+    src: template.j2
+    dest: /etc/foo.conf
+  notify:
+     - restart memcached
+     - restart apache
+
+handlers:
+    - name: restart memcached
+      service:
+        name: memcached
+        state: restarted
+    - name: restart apache
+      service:
+        name: apache
+        state: restarted
+```   
+When the config file is loaded to the target machine, the task will notify the tow handlers and the tow services will restart.
+
+``` NB : we can't use variables in the name of the handler, this will case the entiere play to fail ```
+
+Instead, w can use variables in the task parameters of the handler, and load the values using ``` include_vars ```
+
+```
+tasks:
+  - name: Set host variables based on distribution
+    include_vars: "{{ ansible_facts.distribution }}.yml"
+
+handlers:
+  - name: restart web service
+    service:
+      name: "{{ web_service_name | default('httpd') }}"
+      state: restarted ```   
+
+
+Also handlers can listen to generic topic, and tasks can notify those topic 
+
+```
+handlers:
+    - name: restart memcached
+      service:
+        name: memcached
+        state: restarted
+      listen: "restart web services"
+    - name: restart apache
+      service:
+        name: apache
+        state: restarted
+      listen: "restart web services"
+
+tasks:
+    - name: restart everything
+      command: echo "this task will restart the web services"
+      notify: "restart web services"
+```   
 
 ## Variables
 
