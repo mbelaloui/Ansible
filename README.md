@@ -240,6 +240,13 @@ tasks:
       notify: "restart web services"   
 ```  
 
+* Notify handlers are always run in the same order they are defined, not in the order listed in the notify-statement. This is also the case for handlers using listen.   
+* Handler names and listen topics live in a global namespace.   
+* Handler names are templatable and listen topics are not.   
+* Use unique handler names. If you trigger more than one handler with the same name, the first one(s) get overwritten. Only the last one defined will run.   
+* You cannot notify a handler that is defined inside of an include. As of Ansible 2.1, this does work, however the include must be static.   
+
+
 ## Variables
 
 Variables begin with a letter and never withe a special char.
@@ -295,7 +302,7 @@ Ansible will run commands form current user account. If we want to change this b
 
 
 #### Stoped at 
-https://docs.ansible.com/ansible/latest/user_guide/playbooks.html
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse.html
 
 
 
