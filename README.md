@@ -68,8 +68,8 @@ https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#intro-in
   We use patterns any time we execute an ad-hoc command :    
     - ansible <pattern> -m <module_name> -a "<module_option>"   
   Or a playbook the pattern in the playbook is the content of the hosts:   
-    "- name: <play_name>   
-      hosts: <pattern>"
+    - name: <play_name>   
+      hosts: <pattern>
 
 Since we often want to run a command or playbook against multiple host at once, patterns often refer to inventory groups.   
 
