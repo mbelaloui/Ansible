@@ -197,12 +197,27 @@ https://docs.ansible.com/ansible/latest/reference_appendices/general_precedence.
 
 ## RUN Ansible
 
- - Ad-Hoc : ansible <inventories> -m module --options   ```https://docs.ansible.com/ansible/latest/user_guide/
+### Ad-Hoc commands
+  The ad-hoc commands are quick and easy that demonstarte the simplicity and the power of Ansible, but are not re-usable.
+  We can use any Ansible module in ad-hoc task.
+
+ * Ad-Hoc : ansible <inventories> -m module --options   ```https://docs.ansible.com/ansible/latest/user_guide/
     ad-hoc commandes are not used for configration, management and deployment, these commands are of one time usage. 
 
+  #### Use caes 
+
+  * reboot servers ``` ansible <pattern> -a "/sbin/reboot" -f 10 -u username --become --ask-become-pass ```
+  * copy files ``` ansible <pattern> -m copy -a "src=/etc/hosts dest=/tmp/hosts" ```
+  * manage packages ```  ansible <pattern> -m yum -a "name=acme state=latest" ```
+  * manage users/groups ``` ansible all -m user -a "name=foo password=<crypted password here>" ```
+  * manage services ``` ansible <pattern> -m service -a "name=httpd state=restarted" ```
+  * Gethering facts ``` ansible all -m setup ```
+
+
+
  intro_adhoc.html#intro-adhoc```
- - Playbooks : ansible-playbook --options playbooks.yml
- - Automation framework : Ansible Tower
+ * Playbooks : ansible-playbook --options playbooks.yml
+ * Automation framework : Ansible Tower
 
 
 Ansible will run commands form current user account. If we want to change this behavior, w'll have to pass the username in the commands.
@@ -216,9 +231,7 @@ Ansible will run commands form current user account. If we want to change this b
 
 
 #### Stoped at 
-https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#id10
-7. Ansible – Variables
-mail mbelalou42@gmail.com
+https://docs.ansible.com/ansible/latest/user_guide/playbooks.html
 
 
 
