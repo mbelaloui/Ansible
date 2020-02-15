@@ -31,6 +31,7 @@ We can organize our list of host be creating and nesting groups, that make scali
 A good practice is to use dynamic inventory for more flexibility, and use the FQDN to define hosts rather than IPs.
 We can store in the inventories aliases, variable for single with ```host vars``` or multiple hosts with ```group var```
 
+
 ### Example INI format 
 ```
 ---
@@ -43,8 +44,63 @@ ip/FQDNs           # Host_3
 
 ```
 
+A good practice is to create the ``` group_vars ``` directory and add directories named after the groups or hosts, so all the groups will have the vriables defined in theses files available to them, this can be very useful to keep the variables organized this way when a single file gets too big, or when we want to use Vault on some group variables.
+
+## Inventory Setup
+### By envirenment
+  we can group hosts by environment [test, stagn, prod, ...].
+  This make harder to accidentally change state of node inside the test environment when actualy wanted to update some staging servers
+
+### BY function
+  We can group hosts by functions[ DB, web, service_x,... ]
+This allows us to define some characteristics of a group of same service
+
+### By location
+  We can group hosts by theres locations[ location_1,location_2,... ]
+  This allows us to change state of hosts in a specific location.
+
+NB : The goup_vas and the host_vars directories should be in the same directory of the inventory file to be taiken into account.
 
 https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#intro-inventory
+
+## Patterns
+
+  We use patterns any time we execute an ad-hoc command : 
+    - ansible <pattern> -m <module_name> -a "<module_option>"
+  Or a playbook the pattern in the playbook is the content of the hosts:
+    - name: <play_name>
+      hosts: <pattern>
+
+Since we often want to run a command or playbook against multiple host at once, patterns often refer to inventory groups.   
+
+  ### Common patterns
+
+| Description |	Pattern(s) |	Targets |
+| ------------- |:-------------:| -----:|
+| All hosts |	all (or *)| - |
+|One host	| host1| - |
+|Multiple hosts|  host1:host2 (or host1,host2)| - |
+|One group |  webservers| - |
+|Multiple groups |	webservers:dbservers  |	all hosts in webservers plus all hosts in dbservers|
+|Excluding groups |	webservers:!atlanta |	all hosts in webservers except those in atlanta|
+|Intersection of groups |	webservers:&staging | any hosts in webservers that are also in staging|
+
+
+## Key words related to the host_file
+
+### ansible_host
+  The name of the host to connect to
+
+### ansible_port
+  The connection port number 'default 22'
+
+### ansible_user
+  The user name to use when connecting to the host
+
+### ansible_password
+  The password to use to authenticate to the host ``` Always use vault to store this variable ```
+
+
 
 
 ## Modules 
@@ -187,6 +243,20 @@ https://vmmasterblog.wordpress.com/2017/02/22/introduction-to-ansible/
 
 
 
+
+
+Plays_dire:
+|-> main.yml
+|-> Inventory:            execution_order
+    |->inventory_1.yml      1
+    |->inventory_2.yml      2
+    |-> group_vas:
+      |-> group_1.yml       3
+      |-> host_1.yml        4
+
+
+NB : The inventories are merged in alphabetical order according to the filenames so the result can be controlled by adding prefixes to the files.
+If a variable is defined in the inventor_1.yml and in the inventory_2.yml and group_1.yml and host_1.yml. It's the value in the host_1.yml that will be taken account,
 
 
 
