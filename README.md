@@ -198,10 +198,10 @@ https://docs.ansible.com/ansible/latest/reference_appendices/general_precedence.
 ## RUN Ansible
 
 ### Ad-Hoc commands
-  The ad-hoc commands are quick and easy that demonstarte the simplicity and the power of Ansible, but are not re-usable.
+  The ad-hoc commands are quick and easy, that demonstarte the simplicity and the power of Ansible, but are not re-usable.
   We can use any Ansible module in ad-hoc task.
 
- * Ad-Hoc : ansible <inventories> -m module --options   ```https://docs.ansible.com/ansible/latest/user_guide/
+ * Ad-Hoc : ansible <inventories> -m module --options   ```https://docs.ansible.com/ansible/latest/user_guide/ ```
     ad-hoc commandes are not used for configration, management and deployment, these commands are of one time usage. 
 
   #### Use caes 
