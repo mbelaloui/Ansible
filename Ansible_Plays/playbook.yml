@@ -1,0 +1,82 @@
+---
+
+- name : Setup VM Elastic Data Engineer 
+  hosts: bootcamp
+  become : True
+  vars :
+          ip_bootcamp : 10.11.200.103
+  tasks:
+          - name : Install Pachages needed
+            apt: name= 
+            with_items:
+                    - wget
+                    - curl
+                    - openssl
+
+          - name : install elasticsearsh 
+            apt:
+                    deb : https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.5.1-amd64.deb
+
+                    
+          - name : config elastic network
+            lineinfile:
+                    path: /etc/elasticsearch/elasticsearch.yml
+                    line: 'network.host: _site_'
+
+          - name : config seed network
+            lineinfile:
+                    path: /etc/elasticsearch/elasticsearch.yml
+                    line: 'discovery.seed_hosts: ["{{ ip_bootcamp }}"]'
+ 
+          - name : starte elastic
+            systemd :
+                    name : elasticsearch
+                    enabled : yes
+                    state: started
+
+
+          - name : install kibana
+            apt :
+                    deb : https://artifacts.elastic.co/downloads/kibana/kibana-7.5.1-amd64.deb
+
+          
+          - name : config ip kibana
+            replace:
+                    path: /etc/kibana/kibana.yml
+                    regexp: '#server.host: "localhost"'
+                    replace: 'server.host: "{{ ip_bootcamp }}"'
+
+          - name : config kibana-elastic connexion 
+            lineinfile:
+                    path: /etc/kibana/kibana.yml
+                    line: 'elasticsearch.hosts: ["http://{{ ip_bootcamp }}:9200"]'
+                     
+                    #          - name: Create the log directory if it does not exist
+                    #            file:
+                    #                    path: /var/log/kibana
+                    #                    state: directory
+                    #                    group: root
+                    #                    owner: kibana
+                    #                    mode: '0765'
+  
+                    #          - name: Touch the log file
+                    #            file:
+                    #                    path: /var/log/kibana/kibana.log
+                    #                    state: touch
+                    #                    owner: kibana
+                    #                    group: root
+                    #                    mode: u=rwx,g=wr,o=r
+
+                    #          - name : config logging kibana
+                    #            replace:
+                    #                    path: /etc/kibana/kibana.yml
+                    #                    regexp: '#logging.dest: stdout'
+                    #                    replace: 'logging.dest: /var/log/kibana/kibana.log' 
+
+                   
+          - name : start kibana
+            systemd:
+                    name : kibana
+                    enabled: yes
+                    state : started
+ 

@@ -1,0 +1,17 @@
+---
+
+- name : Int machines playbook
+  hosts : localhost
+  remote_user : user
+  become : True
+  vars :
+  tasks :
+
+  - name : install python with raw
+    raw : dnf install -y python3 python3-dnf libselinux-python
+
+
+
+
+
+...
