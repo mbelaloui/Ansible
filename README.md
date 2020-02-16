@@ -252,9 +252,27 @@ tasks:
 Variables begin with a letter and never withe a special char.
 
 Can be defined :
+- In an inventory file
+*
+``` 
+#for one host
+[group]
+host_name	variable_1= 42     variable_2=24
+```	
+
+``` 
+#for miltiple host
+[group]
+host_name_1
+host_name_2
+
+[group:var]
+variable_1=42
+variable_2=24
+```
 - Inside a play book : vars
 - In a file outside the playbook using vars_file
-- In an inventory file or dir containing files
+ or dir containing files
 - set from the command line
 
 https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
