@@ -253,7 +253,6 @@ Variables begin with a letter and never withe a special char.
 
 Can be defined :
 - In an inventory file
-*
 ``` 
 #for one host
 [group]
@@ -271,6 +270,14 @@ variable_1=42
 variable_2=24
 ```
 - Inside a play book : vars
+```
+---
+- name : test play
+  hosts: group
+  vars:
+  	variable_1:42
+```
+
 - In a file outside the playbook using vars_file
  or dir containing files
 - set from the command line
