@@ -31,6 +31,13 @@ We can organize our list of host be creating and nesting groups, that make scali
 A good practice is to use dynamic inventory for more flexibility, and use the FQDN to define hosts rather than IPs.
 We can store in the inventories aliases, variable for single with ```host vars``` or multiple hosts with ```group var```
 
+inventory parameters: 
+ - alias
+ - ansible_host
+ - ansible_connection <ssh / winrm / localhost >
+ - ansible_port
+ - ansible_user
+ - ansible_ssh_pass / ansible_password
 
 ### Example INI format 
 ```
@@ -38,7 +45,7 @@ We can store in the inventories aliases, variable for single with ```host vars``
 [NAME_HOST]        # group names
 ip/FQDNs           # Host_1
 
-[NAME_GROUP_HOST]  # group names
+[NAME_GROUP_HOST]  # group names [NAME_GROUP_HOST:children]  # group of groups
 ip/FQDNs           # Host_2
 ip/FQDNs           # Host_3
 
@@ -266,6 +273,36 @@ variable in playbook could be overriden by the command line -extra-vars "key=val
 
 https://docs.ansible.com/ansible/latest/reference_appendices/general_precedence.html#general-precedence-rules
 
+## conditionals
+
+we use the ```when``` key word to expresse condition in a play book eg:
+
+  we whant to install nginx in a debian and a redhat system   
+  here w'll use the ```ansible_os_family``` wich is a built-in variable that store the name of the os   
+  in this case, we will use the apt for a debian family os and the yum package manager for the redhat
+  we can have a play that 
+   
+```
+  -
+    name: "install nginx"
+    hosts: my_hosts
+    tasks:
+      -
+        name: "install inginx in Debian"
+        apt:
+          name: nginx
+          state: present
+        when: "ansible_os_family == debian"
+
+      -
+        name: "install inginx in Redhat"
+        yum:
+          name: nginx
+          state: present
+        when: "ansible_os_family == redhat"
+```
+
+
 ## RUN Ansible
 
 ### Ad-Hoc commands
@@ -301,8 +338,24 @@ Ansible will run commands form current user account. If we want to change this b
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 #### Stoped at 
 https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse.html
+
+
+
 
 
 
