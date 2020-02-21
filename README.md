@@ -415,6 +415,8 @@ we want to install wget, git and not apache
 ...
 ```
 
+NB : never use the jinja2 syntax in the when commande
+
 inventory file 
 
 ```
