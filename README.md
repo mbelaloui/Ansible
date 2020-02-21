@@ -259,10 +259,90 @@ tasks:
 Variables begin with a letter and never withe a special char.
 
 Can be defined :
+- In an inventory file
+``` 
+#for one host
+[group]
+host_name	variable_1= 42     variable_2=24
+```	
+
+``` 
+#for miltiple host
+[group]
+host_name_1
+host_name_2
+
+[group:var]
+variable_1=42
+variable_2=24
+```
 - Inside a play book : vars
-- In a file outside the playbook using vars_file
-- In an inventory file or dir containing files
-- set from the command line
+```
+---
+- name : test play
+  hosts: group
+  vars:
+  	variable_1:42
+```
+
+- In a file outside the playbook using vars file in roles
+- In the defaults dir containing files in roles
+- set from the command line  ``` --extra-vars ``` or ``` -e ```
+
+Once we've defined variables, we can use then in playbooks using Jinja2 templating.   
+
+``` "{{ variable_1 }}" ```   
+
+There is an othe type of variables. The Facts, facts are a way of getting data about remote systems for use in playbook variables.   
+Facts are usually discovered automatically by the setup module, and if we know that we don't need facts data about ours hosts, and know everything about ours system, we can turn off fact gathering, this has advantages in scaling in push with very large numbers of systems.   
+
+
+### registering variables
+Variables are used for registering the result of an execution on a command, when we do that we crate a registered variable.   
+```
+  tasks:
+     - shell: /usr/bin/foo
+       register: foo_result
+       ignore_errors: True
+
+     - shell: /usr/bin/bar
+       when: foo_result.rc == 5
+```
+
+
+Here is the order of precedence from least to greatest (the last listed variables winning prioritization):
+
+- command line values (eg “-u user”)   
+- role defaults [1]   
+- inventory file or script group vars [2]   
+- inventory group_vars/all [3]   
+- playbook group_vars/all [3]   
+- inventory group_vars/* [3]   
+- playbook group_vars/* [3]   
+- inventory file or script host vars [2]   
+- inventory host_vars/* [3]   
+- playbook host_vars/* [3]   
+- host facts / cached set_facts [4]   
+- play vars   
+- play vars_prompt   
+- play vars_files   
+- role vars (defined in role/vars/main.yml)   
+- block vars (only for tasks in block)   
+- task vars (only for the task)   
+- include_vars   
+- set_facts / registered vars   
+- role (and include_role) params   
+- include params   
+- extra vars (always win precedence)   
+
+
+### Scoping variables
+You can decide where to set a variable based on the scope you want that value to have. Ansible has three main scopes:
+
+- Global: this is set by config, environment variables and the command line   
+- Play: each play and contained structures, vars entries (vars; vars_files; vars_prompt), role defaults and vars.   
+- Host: variables directly associated to a host, like inventory, include_vars, facts or registered task outputs   
+
 
 https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
 
@@ -352,7 +432,7 @@ Ansible will run commands form current user account. If we want to change this b
 
 
 #### Stoped at 
-https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse.html
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#examples-of-where-to-set-a-variable
 
 
 
