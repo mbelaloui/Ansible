@@ -344,6 +344,7 @@ You can decide where to set a variable based on the scope you want that value to
 - Host: variables directly associated to a host, like inventory, include_vars, facts or registered task outputs   
 
 
+
 https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
 
 ## Precedence rules
@@ -382,6 +383,46 @@ we use the ```when``` key word to expresse condition in a play book eg:
         when: "ansible_os_family == redhat"
 ```
 
+we can also use the canditional in a loop 
+
+we want to install wget, git and not apache
+
+```
+---
+
+-
+ name: "test Install with look and conditionals playbook"
+ hosts: debian
+ vars:
+   packages:
+   - 
+     name: git
+     required: True
+   - 
+     name: wget
+     required: True
+   - 
+     name: apache
+     required: Flase
+ tasks:
+ - 
+   name: "install {{ item.name }} packages in Debian"
+   apt:
+    name: "{{ item.name }}"
+    state: present
+   when: item.required == True
+   loop: "{{packages}}"
+...
+```
+
+inventory file 
+
+```
+cat hosts                            
+debian ansible_host=10.12.1.112 ansible_user=user ansible_connection=ssh
+```
+
+NB : Can be run with ```ansible-playbook -i hosts install.yml ```
 
 ## RUN Ansible
 
@@ -401,7 +442,7 @@ we use the ```when``` key word to expresse condition in a play book eg:
   * manage services ``` ansible <pattern> -m service -a "name=httpd state=restarted" ```
   * Gethering facts ``` ansible all -m setup ```
 
-
+ 
 
  intro_adhoc.html#intro-adhoc```
  * Playbooks : ansible-playbook --options playbooks.yml
@@ -432,7 +473,7 @@ Ansible will run commands form current user account. If we want to change this b
 
 
 #### Stoped at 
-https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#examples-of-where-to-set-a-variable
+https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse.html
 
 
 
