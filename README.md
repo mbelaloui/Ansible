@@ -383,7 +383,7 @@ we use the ```when``` key word to expresse condition in a play book eg:
         when: "ansible_os_family == redhat"
 ```
 
-we can also use the canditional in a loop 
+we can also use the conditional in a loop 
 
 we want to install wget, git and not apache
 
@@ -391,7 +391,7 @@ we want to install wget, git and not apache
 ---
 
 -
- name: "test Install with look and conditionals playbook"
+ name: "Install multiple packages with conditionals playbook"
  hosts: debian
  vars:
    packages:
