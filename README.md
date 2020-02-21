@@ -411,11 +411,15 @@ we want to install wget, git and not apache
     name: "{{ item.name }}"
     state: present
    when: item.required == True
-   loop: "{{packages}}"
+   loop: "{{packages}}"  in the past we use the `with_items:` keyword 
 ...
 ```
 
 NB : never use the jinja2 syntax in the when commande
+
+we have a lot of with_*    [*] are plugins like 
+
+with_file, with_ini, ....
 
 inventory file 
 
