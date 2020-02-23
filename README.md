@@ -103,6 +103,9 @@ Since we often want to run a command or playbook against multiple host at once, 
     * The user name to use when connecting to the host
 - ansible_password   
     * The password to use to authenticate to the host ``` Always use vault to store this variable ```
+- ansible_ssh_private_key_file
+    * To set the path of the private ssh key. ```Best Practice```
+
 
 
 
