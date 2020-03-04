@@ -1,0 +1,17 @@
+---
+- name: Users config
+  hosts: node2
+  tasks:
+          - name: make sur the sudo group exist
+            group:
+                    name: elasticsearch
+                    gid: 114
+                    state: present
+
+          - name: add elastic user
+            user:
+                    name: elasticsearch
+                    uid: 108
+                    group: sudo
+                    state: present
+...

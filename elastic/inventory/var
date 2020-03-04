@@ -1,0 +1,52 @@
+---
+## All node COnfig
+ansible_host: 192.168.1.44			
+ansible_user: root				
+ansible_ssh_pass: toor					# change it to ssh_key
+#ansible_ssh_private_key_file: url to the key file
+
+
+es_bootstrap_memory_lock: true  			## all the node
+es_list_master_nodes:
+-
+-
+-
+
+
+es_cluster_name: my_application			
+es_clustet_monitor_enabled: false			
+es_cluster_monitor_collection_enabled: false		
+
+es_cluster_security_enabled: false			
+es_cluster_transport_security: false		
+es_cluster_http_security: false
+es_cluster_security_verification_mode: certificate
+es_cluster_security_keystore_path: "some path to the the certificat"
+es_cluster_securoty_truststore_path: "some path to the cert"
+es_cluster_security_password: "secret"
+
+
+---
+
+## master node
+es_http_port: 9200		#closed it
+es_node_jvm_mem: "500m"
+es_node_master: true
+es_node_data : false
+es_node_ingest: false
+es_node_ml: false
+
+---
+## Data node
+es_http_port: 9200		# default in the play book 
+es_node_jvm_mem: "500m"
+es_path_data: /var/lib/elasticsearch
+es_path_log: /var/log/elasticsearch
+es_node_master: false
+es_node_data: true
+es_node_ingest: false
+es_node_ml: false
+
+
+## Add allocation awarness params
+## Add discovery config staffs

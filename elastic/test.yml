@@ -1,0 +1,7 @@
+---
+- hosts: node2
+  gather_facts: false
+  tasks:
+          - debug:
+                  msg: "{{ inventory_hostname }}"
+                  

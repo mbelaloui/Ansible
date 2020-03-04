@@ -1,0 +1,5 @@
+[elastic_master]
+master_node1
+
+[elastic_data]
+data_node2
