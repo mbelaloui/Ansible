@@ -1,0 +1,71 @@
+---
+- name: install elastic
+  gather_facts: True
+  hosts: master_node_0
+  #hosts: data_node_0
+  become: True
+  vars:
+          templates: ../templates
+  tasks:
+
+          - name: Add apt_key
+            apt_key:
+                    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+                    state: present
+
+          - name: Install APT repository
+            package:
+                    name: apt-transport-https
+                    state: present
+
+          - name: Save repo
+            lineinfile:
+                    path: /etc/apt/sources.list.d/elastic-7.x.list
+                    line: "deb https://artifacts.elastic.co/packages/7.x/apt stable main"
+                    create: True
+                    state: present
+                    
+          - name: 'update package && Install elasticseach'
+            apt:
+                    update_cache: True
+                    name: elasticsearch
+                    state: present
+            notify:
+                    - ReStart Elasticsearch
+
+
+          - name: config JVM Option
+            template:
+                    src: "{{ templates }}/jvm.options.j2"
+                    dest: /etc/elasticsearch/jvm.options
+                    force: True
+                    mode: 0660
+                    owner: root
+                    group: elasticsearch
+            notify:
+                    - ReStart Elasticsearch
+
+          - name: config Elastic Option
+            template:
+                    src: "{{ templates }}/elasticsearch.yml.j2"
+                    dest: /etc/elasticsearch/elasticsearch.yml
+                    force: True
+                    mode: 0660
+                    owner: root
+                    group: elasticsearch
+            notify:
+                    - ReStart Elasticsearch
+
+                    
+          - name: Start Elasticsearch service
+            service:
+                    name: elasticsearch
+                    state: started
+                    enabled: True
+
+  handlers:
+          - name: ReStart Elasticsearch
+            service:
+                    name: elasticsearch
+                    state: restarted
+...

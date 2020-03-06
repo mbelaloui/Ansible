@@ -1,16 +1,19 @@
 ---
-es_cluster_monitor_collection: false
-es_clustet_monitor: false
+cluster_name: my_application
 
+bootstrap_memory_lock: True
 
-es_cluster_security: false
-es_cluster_transport_security: false
-es_cluster_http_security: false
-es_cluster_security_verification_mode: certificate
-es_cluster_security_keystore_path: "some path to the the certificat"
-es_cluster_securoty_truststore_path: "some path to the cert"
+cluster_monitor_collection: false
+clustet_monitor: false
 
-es_cluster_security_password: "secret"
-es_node_jvm_mem: "500m"
+cluster_security: false
+cluster_transport_security: false
+cluster_http_security: false
+cluster_security_verification_mode: certificate
+cluster_security_keystore_path: "some path to the the certificat"
+cluster_securoty_truststore_path: "some path to the cert"
 
+cluster_security_password: "secret"
+
+http_port: 9200
 ...

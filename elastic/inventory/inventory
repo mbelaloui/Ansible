@@ -1,5 +1,7 @@
-[elastic_master]
-master_node1
+[es_master]
+master_node_0
 
-[elastic_data]
-data_node2
+
+[es_data]
+#data_node_0
+#data_node_1

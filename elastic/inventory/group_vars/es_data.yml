@@ -1,0 +1,13 @@
+---
+path_data: /var/lib/elasticsearch
+path_log: /var/log/elasticsearch
+
+node_voting_only: false
+
+node_master: False
+node_data : True
+node_ml: False
+node_ingest: False
+
+node_jvm_mem: "500m"
+...

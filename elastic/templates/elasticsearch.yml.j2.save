@@ -1,19 +1,21 @@
-"{{ ansible_managed | comment }}" 
+"{{ ansible_managed | comment }}"
 # ---------------------------------- Cluster -----------------------------------
 cluster.name: {{ es_cluster_name }}
 # ------------------------------------ Node ------------------------------------
 node.name: {{ inventory_hostname }}
 node.master: {{ es_node_master }}
+#node.voting_only: {{ es_node_voting_only }}
 node.data: {{ es_node_data }}
-node.
+#node.ingest: {{ es_node_ingest }}
+#node.ml: {{ es_node_ingest }}
 # ----------------------------------- Paths ------------------------------------
 path.data: {{ es_path_data }}
 path.logs: {{ es_path_log }}
 # ----------------------------------- Memory -----------------------------------
 bootstrap.memory_lock: {{ es_bootstrap_memory_lock }}
 # ---------------------------------- Network -----------------------------------
-network.host: {{ ansible_host }}
-http.port: {{ es_http.port }}
+#network.host: {{ ansible_host }}
+#http.port: {{ es_http.port }}
 # --------------------------------- Discovery ----------------------------------
 
 ##  {% for host in group['mster'] %}
@@ -28,12 +30,13 @@ http.port: {{ es_http.port }}
 # get the list of the other master and set the cluster initial_master_node
 # {% endfor %}
 #
-#cluster.initial_master_nodes: ["elasticsearch-node-1"]
+#cluster.initial_master_nodes: ["elasticsearch-node-1"]		master conf
 
 # -------------------------------- Monitoring ----------------------------------
 #xpack.monitoring.enabled: true
 #xpack.monitoring.collection.enabled: true
-#
+#xpack.ml.enabled: true default
+#cluster.remote.connect: false  default
 # --------------------------------- Security -----------------------------------
 
 # xpack.security.enabled: {{ es_cluster_security }}

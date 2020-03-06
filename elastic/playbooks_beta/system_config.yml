@@ -1,0 +1,110 @@
+---
+- name: system config
+  gather_facts: False
+  #hosts: master_node_0
+  hosts: all
+  become: True
+  vars:
+          open_files: 65536
+          num_thread: 4096
+          swap: 1
+  tasks:
+
+          - name: setup swap
+            lineinfile:
+                    path: "/etc/sysctl.d/99-swappiness.conf"
+                    line: "vm.swappiness={{swap}}"
+                    state: present
+                    create: True
+ 
+                    #- name: setup swap
+                    #lineinfile:
+                    #path: "/etc/sysctl.d/99-swappiness.conf"
+                    #line: "vm.swappiness={{swap}}"
+                    #state: present
+
+                    #          - name: restart swap
+                    #            command: "swapoff -a && swapon -a"
+
+
+
+         #- name: "set swapat 1%"
+          #  shell: "cat /proc/sys/vm/swappiness && echo '{{ swap }}' > /proc/sys/vm/swappiness"
+          #  register: out
+          #  changed_when: out.stdout|int != swap 
+
+            #- name: swapoff
+            #  shell: swapon -s | wc -l && swapoff -a
+            #  shell: swapoff -a && swapon -s | wc -l
+            #  register: out
+            #  changed_when: out.stdout|int != 0
+
+                    #          - name: debug
+                    #            debug:
+                    #msg: "{{ out.stdout }}"
+
+          - name: Increase threads
+            lineinfile:
+                    path: /etc/security/limits.conf
+                    line: "elasticsearch - nproc {{ num_thread }}"
+                    state: present
+
+
+          - name: Increase file descriptors
+            lineinfile:
+                    path: /etc/security/limits.conf
+                    line: "elasticsearch - nofile {{ open_files }}"
+                    state: present
+
+          - name: Increase file descriptors
+            lineinfile:
+                    path: /etc/security/limits.conf
+                    line: "elasticsearch hard memlock unlimited"
+                    state: present
+
+
+
+          - name: Increase file descriptors
+            lineinfile:
+                    path: /etc/security/limits.conf
+                    line: "elasticsearch soft memlock unlimited"
+                    state: present
+
+
+
+                    # allow user 'elasticsearch' mlockall
+
+                    #           Systemd configurationedit
+                    #When using the RPM or Debian packages on systems that use systemd, system limits must be specified via systemd.
+
+                    #The systemd service file (/usr/lib/systemd/system/elasticsearch.service) contains the limits that are applied by default.
+
+                    #To override them, add a file called /etc/systemd/system/elasticsearch.service.d/override.conf (alternatively, you may run sudo systemctl edit elasticsearch which opens the file automatically inside your default editor). Set any changes in this file, such as:
+
+                    #[Service]
+                    #LimitMEMLOCK=infinity
+                    #Once finished, run the following command to reload units:
+                    #sudo systemctl daemon-reload
+
+
+
+
+# uncomment the [# session    required   pam_limits.so] in the /etc/pam.d/su in ubuntu distrub
+
+          - name: increase the limits of virtual mem
+            lineinfile:
+                    path: /etc/sysctl.conf
+                    line: "vm.max_map_count=262144"
+                    state: present
+
+          - name: reload the system
+            reboot:
+
+          - name: check vm_map_count
+            shell: "sysctl vm.max_map_count"
+            register: out
+
+          - name: Check if the limit are okey
+            assert:
+                    that:
+                            out.stdout == "vm.max_map_count = 262144"

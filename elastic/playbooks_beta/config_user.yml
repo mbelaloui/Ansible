@@ -1,17 +1,19 @@
 ---
 - name: Users config
-  hosts: node2
+  hosts: data_node_0
   tasks:
           - name: make sur the sudo group exist
             group:
                     name: elasticsearch
-                    gid: 114
-                    state: present
+                    state: absent
 
           - name: add elastic user
             user:
                     name: elasticsearch
-                    uid: 108
+                    uid: 1000
                     group: sudo
+                    password: "vm"
+                    system: true
+                    hidden: false
                     state: present
 ...
