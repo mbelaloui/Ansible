@@ -1,4 +1,7 @@
 ---
+
+type_env: "dev"
+
 cluster_name: my_application
 
 bootstrap_memory_lock: True

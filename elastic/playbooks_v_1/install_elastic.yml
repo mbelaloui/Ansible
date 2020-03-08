@@ -1,8 +1,7 @@
 ---
 - name: install elastic
   gather_facts: True
-  hosts: master_node_0
-  #hosts: data_node_0
+  hosts: all
   become: True
   vars:
           templates: ../templates

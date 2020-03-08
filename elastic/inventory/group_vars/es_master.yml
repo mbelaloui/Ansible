@@ -9,5 +9,5 @@ node_ml: False
 
 node_voting_only: False
 
-node_jvm_mem: "500m"
+node_jvm_mem: "800m"
 ...
