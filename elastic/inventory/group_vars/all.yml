@@ -19,4 +19,15 @@ cluster_securoty_truststore_path: "some path to the cert"
 cluster_security_password: "secret"
 
 http_port: 9200
+
+node_jvm_mem: "1g"
+
+path_data: /var/lib/elasticsearch
+path_log: /var/log/elasticsearch
+
+node_master: True
+node_data : True
+node_ingest: True
+node_ml: False
+
 ...

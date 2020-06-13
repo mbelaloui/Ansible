@@ -1,4 +1,6 @@
 ---
+# clean the play < add conditions to reach multiple OS >
+# Create a role for this need 
 - name: system config
   gather_facts: False
   hosts: all
@@ -23,7 +25,6 @@
          #  register: out
          #  changed_when: out.stdout|int != swap 
 
-
           - name: Increase file descriptors
             lineinfile:
                     path: /etc/security/limits.conf
@@ -42,7 +43,6 @@
                     line: "elasticsearch - nproc {{ num_thread }}"
                     state: present
 
-
           # allow user 'elasticsearch' mlockall 'mmap'
           - name: Give permission to elasticsearch user to lock hard memory
             lineinfile:
@@ -56,10 +56,26 @@
                     line: "elasticsearch soft memlock unlimited"
                     state: present
 
+        # dosen't work for raspberry
+        #   - name: create file  Memory lock
+        #     lineinfile:
+        #                 path: /usr/lib/systemd/system/elasticsearch.service
+        #                 line: "LimitMEMLOCK=infinity" 
+        #                 state: present
+        #                 insertafter: "[Service]"
+        #     notify: Deamon Reload
+
+          - name: Create Dir
+            file:
+                    path: /etc/systemd/system/elasticsearch.service.d
+                    mode:  0755
+                    owner: root
+                    group: root
+                    state: directory
 
           - name: Set Memory lock
             lineinfile:
-                    path: /usr/lib/systemd/system/elasticsearch.service
+                    path: /etc/systemd/system/elasticsearch.service.d/elasticsearch.conf
                     line: "LimitMEMLOCK=infinity" 
                     state: present
                     insertafter: "[Service]"

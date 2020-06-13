@@ -4,9 +4,7 @@ cluster.name: {{ cluster_name }}
 # ------------------------------------ Node ------------------------------------
 node.name: {{ inventory_hostname }}
 node.master: {{ node_master }}
-{% if host in group["es_master"] %}
-node.voting_only: {{ node_voting_only }}
-{% endif %}
+
 node.data: {{ node_data }}
 node.ingest: {{ node_ingest }}
 node.ml: {{ node_ml }}

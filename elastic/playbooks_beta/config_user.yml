@@ -1,6 +1,10 @@
 ---
+## To change in this play
+#
+# Create a role that will add user in a OS
+# Variable [user_name, password_user group_user, Uid_user]
 - name: Users config
-  hosts: data_node_0
+  hosts: all
   tasks:
           - name: make sur the sudo group exist
             group:
@@ -10,10 +14,10 @@
           - name: add elastic user
             user:
                     name: elasticsearch
-                    uid: 1000
-                    group: sudo
                     password: "vm"
-                    system: true
-                    hidden: false
+                    group: sudo
+                    uid: 1000
                     state: present
+                    #                    system: true
+                    #                    hidden: false
 ...

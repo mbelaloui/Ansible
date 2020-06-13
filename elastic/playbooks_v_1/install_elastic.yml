@@ -46,7 +46,8 @@
 
           - name: config Elastic Option
             template:
-                    src: "{{ templates }}/elasticsearch.yml.j2"
+#                    src: "{{ templates }}/elasticsearch.yml.j2"
+                    src: "{{ templates }}/elasticsearch.yml.j2.save_v2"
                     dest: /etc/elasticsearch/elasticsearch.yml
                     force: True
                     mode: 0660
