@@ -16,7 +16,7 @@ Clone the repository: https://github.com/mbelaloui/Ansible.git
 Run the install script with sudo privileges 
 
 ```
-    sudo bash run/Install_ansible.sh
+    sudo bash Install_ansible.sh
 ```
 
 Enjoye...
