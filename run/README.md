@@ -7,16 +7,16 @@ Script Used to install and configure Ansible in a master machine, the objective 
 
 ## usage:
 
-Clone the repository: git@gitlab.com:mbelaloui/trash.git
+Clone the repository: https://github.com/mbelaloui/Ansible.git
 
 ```
-    git clone git@gitlab.com:mbelaloui/trash.git
+    git clone https://github.com/mbelaloui/Ansible.git
 ```
 
 Run the install script with sudo privileges 
 
 ```
-    sudo bash Install_ansible.sh
+    sudo bash run/Install_ansible.sh
 ```
 
 Enjoye...
