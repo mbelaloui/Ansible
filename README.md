@@ -466,28 +466,8 @@ Ansible will run commands form current user account. If we want to change this b
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #### Stoped at 
 https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse.html
-
-
-
-
-
 
 
 
@@ -507,8 +487,6 @@ https://vmmasterblog.wordpress.com/2017/02/22/introduction-to-ansible/
 
 
 
-
-
 Plays_dire:
 |-> main.yml
 |-> Inventory:            execution_order
@@ -520,48 +498,4 @@ Plays_dire:
 
 
 NB : The inventories are merged in alphabetical order according to the filenames so the result can be controlled by adding prefixes to the files.
-If a variable is defined in the inventor_1.yml and in the inventory_2.yml and group_1.yml and host_1.yml. It's the value in the host_1.yml that will be taken account,
-
-
-
-# Roles to write:
-
-
-## Role 1 to all new machine  `init machine`
-- With raw module install python in the target machines
-- Send ssh-key.pub to the target machines
-- Change the connection security to accept only keepass
-- Restart ssh service
-
-## Role 2 Config system to handle distributed services
-- Call the role 1
-- Swap 1%
-- Ulimit <fd, Numbere of threads, lock memory>
-- Increase the limit of the virtual memory. 
-
-### `NB : the deb and rpm pachages of easticsearch will configure the virtual memory and Numbere of threads automaticly`
-
-
-## Role 3 `Install default elasticsearch`
-- Call the role 2
-- Install elasticsearch.deb 
-- configure Heap-Jvm
-
-## Role 4 `install Master node elasticearch`
-- Call the role 3
-- Configure port `close 9200 Port`
-- Copie the template file to the target machine
-
-
-## Role 5 `install Data node elasticearch`
-- Call the role 3
-- Copie the template file to the target machine
-
-
-## Role 6 `install Coordinating node elasticearch`
-- Call the role 3
-- Copie the template file to the target machine
-
-## Role 6 `install Ingest node elasticearch`
-- Call the role 3
-- Copie the template file to the target machine
+If a variable is defined in the inventor_1.yml and in the inventory_2.yml and group_1.yml and host_1.yml. It's the value in the host_1.yml that will be taken account.
